@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta name="viewport" content="widts=device-width,initial-scale=1.0">
 </head>
-<body class="red darken-3 white-text">　<!-- 見えるとこっ/// -->
+  <body class="red darken-3 white-text">　<!-- 見えるとこっ/// -->
     <div class="container">
         <h1><img src="virus.png" style="width:10%;vertical-align:middle;">警告</h1>
     <h4>あなたの<span id="device"></span>からウイルスが発見されました</h4>
@@ -36,8 +36,53 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="trap.js"></script>
     <script>
+    function play_se(){
+      var warning = new Audio('alert.mp3')
+      var voice = new Audio('male_voice.mp3')
+      warning.play()
+      voice.play()
+    }
 
-</body>
+    $(function(){
+
+      var time=30;
+      setInterval(function(){
+        time--;
+        $('#timer').text(time);
+      },1000);
+
+      $('.modal').modal({dismissible: false});
+      $('#alert').modal('open');
+      $('#close').click(function(){
+        $('#alert').modal('close');
+        play_se();
+      });
+
+      var device = navigator.userAgent.match(/Android|iPhone|iPad/);
+      if (device == null){
+        device = '端末';
+      }
+      $('#device').text(device);
+
+
+
+      $('#test').click(play_se);
+
+      histry.pushState(null,null,null);
+      $(window).on("popstate", function(e){
+        if (!e.originalEvent.state){
+          play_se();
+          history.pushState(null, null, null);
+          return;
+
+
+      }
+      });
+    
+    <script>
+
+
+  </body>
 
 </html>
 
