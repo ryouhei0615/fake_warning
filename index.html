@@ -60,7 +60,9 @@
         $('#alert').modal('open');
         $('#close').click(function(){
           $('#alert').modal('close');
-          play_se();
+          for (let i = 0; i < 5; i++) {
+            play_se();
+          }
         });
 
         var device = navigator.userAgent.match(/Android|iPhone|iPad/);
